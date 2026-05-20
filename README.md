@@ -38,7 +38,7 @@ npm run dev
 npm run electron:build
 ```
 
-The installer will be generated in the `release/` folder.
+The installer and the executable will be generated in the `release/` folder.
 
 ## License
 
