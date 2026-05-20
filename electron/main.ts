@@ -13,6 +13,7 @@ function createWindow() {
     height: 720,
     title: 'Luzu Soundboards',
     autoHideMenuBar: true,
+    icon: path.join(__dirname, '../public/icon.ico'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
