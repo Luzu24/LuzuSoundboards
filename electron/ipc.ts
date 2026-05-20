@@ -9,16 +9,18 @@ export function registerIpcHandlers() {
     if (!fs.existsSync(SOUNDBOARDS_PATH)) {
       fs.mkdirSync(SOUNDBOARDS_PATH, { recursive: true })
     }
-    return fs.readdirSync(SOUNDBOARDS_PATH).filter(f => f.endsWith('.json'))
+    return fs.readdirSync(SOUNDBOARDS_PATH).filter((f: string) =>
+      f.endsWith('.mp3') || f.endsWith('.wav')
+    )
   })
 
-  ipcMain.handle('load-soundboard', (_event, name: string) => {
+  ipcMain.handle('load-soundboard', (_event: any, name: string) => {
     const filePath = path.join(SOUNDBOARDS_PATH, name)
     if (!fs.existsSync(filePath)) throw new Error('Soundboard not found')
     return JSON.parse(fs.readFileSync(filePath, 'utf-8'))
   })
 
-  ipcMain.handle('save-soundboard', (_event, name: string, data: unknown) => {
+  ipcMain.handle('save-soundboard', (_event: any, name: string, data: unknown) => {
     if (!fs.existsSync(SOUNDBOARDS_PATH)) {
       fs.mkdirSync(SOUNDBOARDS_PATH, { recursive: true })
     }
@@ -27,7 +29,11 @@ export function registerIpcHandlers() {
     return true
   })
 
-  ipcMain.handle('get-audio-devices', async () => {
+  ipcMain.handle('get-sound-path', (_event: any, fileName: string) => {
+    return path.join(SOUNDBOARDS_PATH, fileName)
+  })
+
+  ipcMain.handle('get-audio-devices', () => {
     return []
   })
 }

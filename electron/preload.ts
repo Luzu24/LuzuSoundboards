@@ -5,5 +5,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   loadSoundboard: (name: string) => ipcRenderer.invoke('load-soundboard', name),
   saveSoundboard: (name: string, data: unknown) => ipcRenderer.invoke('save-soundboard', name, data),
   listSoundboards: () => ipcRenderer.invoke('list-soundboards'),
-  playSound: (filePath: string, deviceId: string) => ipcRenderer.invoke('play-sound', filePath, deviceId),
+  getSoundPath: (fileName: string) => ipcRenderer.invoke('get-sound-path', fileName),
 })

@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
-import { registerIpcHandlers } from './ipc'
+import { registerIpcHandlers } from './ipc.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -11,6 +11,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 720,
+    title: 'Luzu Soundboards',
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
